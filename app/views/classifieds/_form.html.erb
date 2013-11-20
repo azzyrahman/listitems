@@ -1,0 +1,34 @@
+
+<%= form_for(@classified) do |f| %>
+  <% if @classified.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@classified.errors.count, "error") %> prohibited this lassified from being saved:</h2>
+
+      <ul>
+      <% @classified.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= f.select(:category_id, Category.all.collect {|cat| [cat.name, cat.id]}, :prompt => 'Select') %>
+  </div>
+    <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area(:description, :cols => "70", :rows => "10") %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-medium btn-primary"%>
+  </div>
+<% end %>
